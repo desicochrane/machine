@@ -255,6 +255,7 @@ import Api from './Api'
 
 const Machine = StateMachine('Init')
 
+// State: Init
 Machine.transition('Init', 'Load', m => {
     // first set the new state on the machine
     m.setState('GetSession')
@@ -265,22 +266,13 @@ Machine.transition('Init', 'Load', m => {
         .catch(err => m.dispatch(err)) // if error, dispatch the error
 })
 
-Machine.transition('GetSession', 'OK', m => {
-    m.setState('Done')
-})
+// State: GetSession
+Machine.transition('GetSession', 'OK', m => m.setState('Done'))
+Machine.transition('GetSession', 'NotAuthorized', m => m.setState('Form'))
 
-Machine.transition('GetSession', 'NotAuthorized', m => {
-    m.setState('Form')
-})
-
-Machine.transition('Form', 'ChangeEmail', (m, email) => {
-    m.model.email = email
-})
-
-Machine.transition('Form', 'ChangePassword', (m, password) => {
-    m.model.password = password
-})
-
+// State: Form
+Machine.transition('Form', 'ChangeEmail', (m, email) => m.model.email = email)
+Machine.transition('Form', 'ChangePassword', (m, password) => m.model.password = password)
 Machine.transition('Form', 'Submit', m => {
     m.setState('Authenticate')
 
@@ -289,13 +281,9 @@ Machine.transition('Form', 'Submit', m => {
         .catch(err => m.dispatch(err)) // if error, dispatch the error
 })
 
-Machine.transition('Authenticate', 'OK', m => {
-    m.setState('Done')
-})
-
-Machine.transition('Authenticate', 'NotAuthorized', m => {
-    m.setState('Form')
-})
+// State: Authenticate
+Machine.transition('Authenticate', 'OK', m => m.setState('Done'))
+Machine.transition('Authenticate', 'NotAuthorized', m => m.setState('Form'))
 
 export default Machine
 ```
