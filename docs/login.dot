@@ -1,0 +1,26 @@
+digraph {
+  node [shape=box, fontname="Fira Code"]
+  edge [fontname="Fira Code"]
+
+  0 [shape=point]
+  0 -> Init [label="start"]
+
+    # Frontend States
+    Init, Form [style=filled, fillcolor="#38decc"]
+    Done [shape=doublecircle style=filled, fillcolor="#00C300"]
+
+    # Backend States
+    GetSession, Authenticate [style=filled, fillcolor="#283593" fontcolor=white]
+
+  Init -> GetSession [label="Load"]
+
+  GetSession -> Done [label="OK"]
+
+  GetSession -> Form [label="NotAuthorized" color=red]
+
+  Form -> Form [label="ChangeEmail,ChangePassword"]
+  Form -> Authenticate [label="Submit"]
+
+  Authenticate -> Form [label="NotAuthorized" color=red]
+  Authenticate -> Done [label="OK"]
+}

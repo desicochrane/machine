@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require babel-core/register ./tests/**/*.js"
+    "test": "mocha --require babel-core/register ./tests/**/*Test.js"
   },
   "repository": {
     "type": "git",
