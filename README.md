@@ -4,7 +4,7 @@
 # Example: Login State Machine
 
 ### The state machine
-<img src="docs/login.dot.png">
+<img src="docs/login.dot.svg">
 
 ### The screens
 
@@ -244,7 +244,7 @@ describe('Authenticate', () => {
 ```js
 Machine.transition('Authenticate', 'OK', m => m.setState('Done'))
 Machine.transition('Authenticate', 'NotAuthorized', m => m.setState('Form'))
-```s 
+```
 
 
 
