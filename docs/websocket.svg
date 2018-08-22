@@ -1,3 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="500" height="489" viewBox="0 0 500 489">
-  <polygon fill="#FFF" points="41 507.713 41 19 541 19 541 507.713" transform="translate(-41 -19)"/>
+  <g fill="none" fill-rule="evenodd">
+    <polygon fill="#FFF" fill-rule="nonzero" points="0 488.713 0 0 500 0 500 488.713"/>
+    <circle cx="290.614" cy="5" r="1.524" fill="#000" fill-rule="nonzero" stroke="#000"/>
+    <circle cx="290.613" cy="86.616" r="46.562" stroke="#000"/>
+    <path stroke="#000" d="M290.049351,6.35181775 C290.049351,9.9883866 290.049351,19.1335393 290.049351,29.9641202"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="293.012 30.028 290.049 38.938 287.087 30.028"/>
+    <ellipse cx="65.443" cy="251.483" stroke="#000" rx="62.038" ry="61.591"/>
+    <path stroke="#000" d="M253.277703,114.043416 C217.825168,140.323085 164.046501,180.187255 123.173027,210.485271"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="125.027 213.028 115.957 215.834 121.308 207.951"/>
+    <circle cx="290.613" cy="252.496" r="72.47" stroke="#000"/>
+    <circle cx="291.177" cy="428.728" r="56.994" stroke="#000"/>
+    <path stroke="#000" d="M114.390916,289.757041 C151.029027,318.431132 201.114022,357.62924 238.493106,386.8833"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="240.436 384.424 245.555 392.41 236.57 389.358"/>
+    <path stroke="#000" d="M290.226595,179.100831 C290.226595,166.466485 290.226595,153.497717 290.226595,141.399753"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="287.108 141.282 290.227 132.338 293.345 141.282"/>
+    <path stroke="#000" d="M219.63886,267.900704 C198.562656,270.877303 175.386541,272.470037 154.028954,270.303327 C147.914724,269.683027 141.596925,268.826814 135.282167,267.82167"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="133.957 270.846 125.649 266.191 134.985 264.537"/>
+    <path stroke="#000" d="M219.63886,237.749394 C198.562656,240.725993 175.386541,242.318726 154.028954,240.152017 C147.914724,239.531717 141.596925,238.675504 135.282167,237.67036" transform="matrix(1 0 0 -1 0 478.825)"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="133.957 244.44 125.649 239.785 134.985 238.131" transform="matrix(1 0 0 -1 0 482.571)"/>
+    <circle cx="445.805" cy="251.93" r="51.274" stroke="#000"/>
+    <path stroke="#000" d="M410.062256,213.77301 C385.656867,187.719379 353.185711,153.055381 328.211509,126.394621"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="325.862 128.47 322.033 119.799 330.442 124.193"/>
+    <path stroke="#000" d="M290.26377,370.841241 C290.26377,358.830214 290.26377,345.925218 290.26377,333.200447"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="287.112 332.926 290.264 323.982 293.415 332.926"/>
+    <path stroke="#000" d="M333.106282,391.127657 C345.138489,380.062733 357.901823,367.613728 368.860824,355.366763 C383.663339,338.824471 398.469356,319.512578 411.048404,302.069465"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="408.517 300.204 416.297 294.722 413.631 303.863"/>
+    <path stroke="#000" d="M345.576433,414.315035 C356.120903,415.986654 363.577698,420.643587 363.577698,428.285567 C363.577698,433.539456 360.053183,437.382365 354.423928,439.814385"/>
+    <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="355.124 442.853 345.576 442.256 353.418 436.86"/>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="264.04" y="88.428">Stopped</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="27.208" y="254.039">Connecting</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="153.899" y="149.42">Start</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="250.225" y="251.995">Disconnected</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="261.999" y="436.221">Connected</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="123.206" y="355.534">ConnOpen</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="296.715" y="163.453">Stop</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="158.615" y="283.488">Retry</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="138.615" y="230.822">ConnClosed</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="419.036" y="255.133">Stopping</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="372.93" y="161.893">ConnClosed</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="293.147" y="350.267">ConnClosed</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="379.458" y="355.65">Stop</tspan>
+    </text>
+    <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="12">
+      <tspan x="371.821" y="427.882">Message</tspan>
+    </text>
+  </g>
 </svg>
