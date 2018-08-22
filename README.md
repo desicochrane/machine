@@ -320,41 +320,133 @@ We can scaffold the login state machine as follows:
 import StateMachine from '../src/StateMachine'
 import Api from './Api'
 
-const Machine = StateMachine('Init')
+export const States = {
+    Init: 'Init',
+    GetSession: 'GetSession',
+    Form: 'Form',
+    Authenticate: 'Authenticate',
+    Done: 'Done',
+}
 
-// Init
-Machine.transition('Init', 'Load', m => {
-    m.setState('GetSession')
+export const Events = {
+    Load: 'Load',
+    OK: 'OK',
+    ChangeEmail: 'ChangeEmail',
+    ChangePassword: 'ChangePassword',
+    Submit: 'Submit',
+}
+
+export const Errors = {
+    Unexpected: 'Unexpected',
+    NotAuthorized: 'NotAuthorized',
+}
+
+export function NewModel() {
+    return {
+        email: '',
+        password: '',
+    }
+}
+
+const Machine = StateMachine(States.Init, (m, err) => {
+    m.setState(Errors.Unexpected)
+    throw Error(err)
+})
+
+Machine.transition(States.Init, Events.Load, m => {
+    m.setState(States.GetSession)
 
     Api.post('/get-session')
-        .then(() => m.dispatch('OK'))
+        .then(() => m.dispatch(Events.OK))
         .catch(err => m.dispatch(err))
 })
 
-// GetSession
-Machine.transition('GetSession', 'OK', m => m.setState('Done'))
-Machine.transition('GetSession', 'NotAuthorized', m => m.setState('Form'))
+Machine.transition(States.GetSession, Events.OK, m => {
+    m.setState(States.Done)
+})
+Machine.transition(States.GetSession, Errors.NotAuthorized, m => {
+    m.setState(States.Form)
+})
 
-// form
-Machine.transition('Form', 'ChangeEmail', (m, email) => m.model.email = email)
-Machine.transition('Form', 'ChangePassword', (m, password) => m.model.password = password)
-Machine.transition('Form', 'Submit', m => {
-    m.setState('Authenticate')
+Machine.transition(States.Form, Events.ChangeEmail, (m, email) => {
+    m.model.email = email
+})
+Machine.transition(States.Form, Events.ChangePassword, (m, password) => {
+    m.model.password = password
+})
+Machine.transition(States.Form, Events.Submit, m => {
+    m.setState(States.Authenticate)
 
     Api.post('/authenticate', m.model)
-        .then(() => m.dispatch('OK'))
+        .then(() => m.dispatch(Events.OK))
         .catch(err => m.dispatch(err))
 })
 
-Machine.transition('Authenticate', 'OK', m => m.setState('Done'))
-Machine.transition('Authenticate', 'NotAuthorized', m => m.setState('Form'))
+Machine.transition(States.Authenticate, Events.OK, m => {
+    m.setState(States.Done)
+})
+Machine.transition(States.Authenticate, Errors.NotAuthorized, m => {
+    m.setState(States.Form)
+})
 
 export default Machine
+
 ```
 
 ### Usage in Vue
 
 ```js
+import LoginMachine, { States, Events, Errors, NewModel } from './LoginMachine'
+
+const m = LoginMachine.start(NewModel(), { logging: true })
+
+new Vue({
+    data: { m },
+    mounted: () => m.dispatch(Events.Load),
+    computed: {
+        err: () => m.inState(Errors.Unexpected),
+        showInit: () => m.inState(States.Init, States.GetSession),
+        showForm: () => m.inState(States.Form, States.Authenticate),
+        showDashboard: () => m.inState(States.Done),
+        isSubmitting: () => m.inState(States.Authenticate),
+    },
+    methods: {
+        changeEmail: email => m.dispatch(Events.ChangeEmail, email),
+        changePassword: password => m.dispatch(Events.ChangePassword, password),
+        submit: () => m.dispatch(Events.Submit),
+    },
+    template: `
+<div>
+  <div v-if="err">Whoops! Something went wrong.</div>
+
+  <div v-if="showInit">Loading...</div>
+
+  <div v-if="showDashboard">Welcome to Dashboard</div>
+
+  <div v-if="showForm">
+    <div>Log in</div>
+
+    <form @submit.prevent="submit">
+      <input @input="evt => changeEmail(evt.target.value)"
+             :value="m.model.email"
+             :disabled="isSubmitting"
+             placeholder="Email">
+
+      <input type="password"
+             @input="evt => changePassword(evt.target.value)"
+             :value="m.model.password"
+             :disabled="isSubmitting"
+             placeholder="password">
+
+      <button type="submit" :disabled="isSubmitting">
+        <span v-if="isSubmitting">Logging in...</span>
+        <span v-else>Log in</span>
+      </button>
+    </form>
+  </div>
+</div>       
+    `
+})
 ```
 
 
