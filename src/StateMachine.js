@@ -8,6 +8,7 @@ export default function(startState, onError) {
             model,
             state: null,
             setState,
+            inState,
             dispatch,
         }
 
@@ -17,6 +18,10 @@ export default function(startState, onError) {
             } else {
                 throw Error(msg)
             }
+        }
+
+        function inState() {
+            return Array.from(arguments).find(state => model.state === state)
         }
 
         function dispatch(event, data) {
@@ -65,4 +70,3 @@ export default function(startState, onError) {
         transition,
     }
 }
-

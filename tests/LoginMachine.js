@@ -2,48 +2,77 @@
 import StateMachine from '../src/StateMachine'
 import Api from './Api'
 
-const Machine = StateMachine('Init')
+export const States = {
+    Init: 'Init',
+    GetSession: 'GetSession',
+    Form: 'Form',
+    Authenticate: 'Authenticate',
+    Done: 'Done',
+}
 
-Machine.transition('Init', 'Load', m => {
-    // first set the new state on the machine
-    m.setState('GetSession')
+export const Events = {
+    Load: 'Load',
+    OK: 'OK',
+    ChangeEmail: 'ChangeEmail',
+    ChangePassword: 'ChangePassword',
+    Submit: 'Submit',
+}
 
-    // send the api request
+export const Errors = {
+    Unexpected: 'Unexpected',
+    NotAuthorized: 'NotAuthorized',
+}
+
+export function NewModel() {
+    return {
+        email: '',
+        password: '',
+    }
+}
+
+const Machine = StateMachine(States.Init, (m, err) => {
+    m.setState(Errors.Unexpected)
+    throw Error(err)
+})
+
+Machine.transition(States.Init, Events.Load, m => {
+    m.setState(States.GetSession)
+
     Api.post('/get-session')
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
+        .then(() => m.dispatch(Events.OK))
+        .catch(err => m.dispatch(err))
 })
 
-Machine.transition('GetSession', 'OK', m => {
-    m.setState('Done')
+Machine.transition(States.GetSession, Events.OK, m => {
+    m.setState(States.Done)
 })
 
-Machine.transition('GetSession', 'NotAuthorized', m => {
-    m.setState('Form')
+Machine.transition(States.GetSession, Errors.NotAuthorized, m => {
+    m.setState(States.Form)
 })
 
-Machine.transition('Form', 'ChangeEmail', (m, email) => {
+Machine.transition(States.Form, Events.ChangeEmail, (m, email) => {
     m.model.email = email
 })
 
-Machine.transition('Form', 'ChangePassword', (m, password) => {
+Machine.transition(States.Form, Events.ChangePassword, (m, password) => {
     m.model.password = password
 })
 
-Machine.transition('Form', 'Submit', m => {
-    m.setState('Authenticate')
+Machine.transition(States.Form, Events.Submit, m => {
+    m.setState(States.Authenticate)
 
     Api.post('/authenticate', m.model)
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
+        .then(() => m.dispatch(Events.OK))
+        .catch(err => m.dispatch(err))
 })
 
-Machine.transition('Authenticate', 'OK', m => {
-    m.setState('Done')
+Machine.transition(States.Authenticate, Events.OK, m => {
+    m.setState(States.Done)
 })
 
-Machine.transition('Authenticate', 'NotAuthorized', m => {
-    m.setState('Form')
+Machine.transition(States.Authenticate, Errors.NotAuthorized, m => {
+    m.setState(States.Form)
 })
 
 export default Machine

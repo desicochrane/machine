@@ -157,7 +157,5 @@ describe('LoginMachine', () => {
 
         // And an api request to '/get-session' should have been called
         sinon.assert.calledWith(api, '/get-session')
-
-
     })
 })
