@@ -1,4 +1,4 @@
-import StateMachine from './StateMachine'
+import StateMachine from '../StateMachine'
 
 const WebsocketMachine = StateMachine('Stopped')
 

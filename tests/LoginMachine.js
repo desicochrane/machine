@@ -1,5 +1,5 @@
 // LoginMachine.js
-import StateMachine from '../src/StateMachine'
+import StateMachine from '../StateMachine'
 import Api from './Api'
 
 export const States = {
