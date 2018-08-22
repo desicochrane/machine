@@ -23,6 +23,9 @@ This demonstrates how the StateMachine function is used to bootstrap a new state
 From the `Stopped` state there is only the `Start` transition event, which we can specify:
 ```js
 // WebsocketMachine.js
+import StateMachine from './StateMachine'
+
+const WebsocketMachine = StateMachine('Stopped')
 
 WebsocketMachine.transition('Stopped', 'Start', (m, data) => {
     m.setState('Connecting')
@@ -47,6 +50,9 @@ To illustrate how dispatching events works, we can next implement the bootstrapp
 
 ```js
 // WebsocketMachine.js
+import StateMachine from './StateMachine'
+
+const WebsocketMachine = StateMachine('Stopped')
 
 WebsocketMachine.transition('Stopped', 'Start', (m, data) => {
     m.setState('Connecting')
