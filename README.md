@@ -8,7 +8,7 @@ Consider implementing a wrapper around a browser websocket connection. Your API 
 
 We can visualise how should work with the following state machine:
 
-<img src="docs/websocket.dot.png" style="display: block; width: 300px; margin: 0 auto;">
+<img src="docs/websocket.svg" style="display: block; width: 300px; margin: 0 auto;">
 
 The machine is initially in the `Stopped` state. We specify this when we create our state machine:
 ```js
