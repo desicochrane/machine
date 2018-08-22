@@ -144,253 +144,177 @@ const ws = WebsocketMachine.start(model)
 
 This illustrates the `start` method, which returns a new instance of the state machine. It takes as argument a model which can be mutated and accessed internally by the state machine - in this case it provides a callback to be used when there is a websocket message arriving.
 
-## Example 2: Login Form
+## Example 2: Login Form + Testing + VueJS
 
-### The state machine
-<img src="docs/login.dot.svg" style="max-width: 300px; margin: 0 auto;">
+Consider next implementing a login form. This login form should redirect immediately to the dashboard if the user is already logged in, otherwise it should show the email and password form. Once on the form, the user can change the email and passowrd before submitting the form, if they are authorized then they should be redirected to the dashboard.
 
-### The screens
+Based on these requirements we can construct the following state machine:
 
 
-### Start from the tests
+<img src="docs/login.dot.svg">
+
+
+#### Testing
+
+The state machine is delightfully easy to unit test and usually goes in 3 steps:
+
+1. Setup the test with an initial state and initial model data
+2. Dispatch an event
+3. Assert final state and model data.
+
+One convention is to structure your tests with `describe(state)` and `it(event)`. A full unit test suite then might be as follows:
 
 ```js
 // LoginMachineTest.js
+
 import { expect } from 'chai'
-import Machine from './LoginMachine'
-
-describe('LoginMachine', () => {
-    it('starts in INIT state', () => {
-        // start a new instance of the machine
-        const m = Machine.start()
-        
-        // assert the initial state is 'init'
-         expect(m.state).equal('Init')
-    })
-})
-```
-
-We can make it pass by:
-
-```js
-// LoginMachine.js
-import StateMachine from 'machine'
-
-// Create a new state machine with 'init' as initial state
-const Machine = StateMachine('Init')
-
-export default Machine
-```
-
-Great. Looking at our state machine diagram then, we can see the valid only transition from Init state is the "Load" event.
-This is fired when the app has loaded and ready to start. When this occurs, we want to send an api request to our backend endpoint '/get-session' to see if we are already logged in. We write up a test to reflect this directly:
-
-```js
-// LoginMachineTest.js
 import sinon from 'sinon'
+import Machine from './LoginMachine'
+import Api from './Api'
 
 const sandbox = sinon.createSandbox()
 
-describe('Init', () => {
+describe('LoginMachine', () => {
     afterEach(sandbox.restore)
 
-    it('Load', () => {
-        // Given we are in the Init state
+    it('starts in INIT state', () => {
+        // start a new instance of the machine
         const m = Machine.start()
 
-        // and that our backend api is mocked
-        const api = sandbox.stub(Api, 'post').returns(Promise.defer().promise)
-
-        // When the 'Load' event is dispatched
-        m.dispatch('Load')
-
-        // Then we should be in the 'GetSession' state
-        expect(m.state).equal('GetSession')
-
-        // And an api request to '/get-session' should have been called
-        sinon.assert.calledWith(api, '/get-session')
-    })
-})
-```
-
-If we run this test we should get the error: `Error: transition Init:Load not defined`. This points us in the right direction.
-
-```js
-// LoginMachine.js
-
-Machine.transition('Init', 'Load', m => {
-    // first set the new state on the machine
-    m.setState('GetSession')
-
-    // send the api request
-    Api.post('/get-session')
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
-})
-```
-
-A transition definition takes a State, Event, and Callback as arguments. The Callback takes as argument an instance of the machine itself, and any data passed along with the Event.
-
-Next we can look at the 'GetSession' state, it needs to handle both the 'OK' and 'NotAuthorized' events
-```js
-// LoginMachineTest.js
-
-describe('GetSession', () => {
-
-    it('OK', () => {
-        const m = Machine.start()
-        m.setState('GetSession')
-
-        m.dispatch('OK')
-
-        expect(m.state).equal('Done')
+        // expect the initial state is 'init'
+        expect(m.state).equals('Init')
     })
 
-    it('NotAuthorized', () => {
-        const m = Machine.start()
-        m.setState('GetSession')
+    describe('Init', () => {
 
-        m.dispatch('NotAuthorized')
+        it('Load', () => {
+            // Given we are in the Init state
+            const m = Machine.start()
 
-        expect(m.state).equal('Form')
+            // and that our backend api is mocked
+            const api = sandbox.stub(Api, 'post')
+            api.returns(Promise.defer().promise)
+
+            // When the 'Load' event is dispatched
+            m.dispatch('Load')
+
+            // Then we should be in the 'GetSession' state
+            expect(m.state).equals('GetSession')
+
+            // And an api request to '/get-session' should have been called
+            sinon.assert.calledWith(api, '/get-session')
+        })
     })
-})
-```
 
-We should now see `Error: transition GetSession:OK not defined` and `Error: transition GetSession:NotAuthorized not defined`
+    describe('GetSession', () => {
 
-```js
-// LoginMachine.js
-Machine.transition('GetSession', 'OK', m => {
-    m.setState('Done')
-})
+        it('OK', () => {
+            const m = Machine.start()
+            m.setState('GetSession')
 
-Machine.transition('GetSession', 'NotAuthorized', m => {
-    m.setState('Form')
-})
-```
+            m.dispatch('OK')
 
-Next, we can write our test for the 'Form' state:
+            expect(m.state).equals('Done')
+        })
 
-```js
-describe('Form', () => {
-    it('ChangeEmail,ChangePassword', () => {
-        // Given our initial model
-        const model = {
-            email: '',
-            password: '',
-        }
-        const m = Machine.start(model)
+        it('NotAuthorized', () => {
+            const m = Machine.start()
+            m.setState('GetSession')
 
-        // And that we are in the 'Form' state
-        m.setState('Form')
+            m.dispatch('NotAuthorized')
 
-        // When the ChangeEmail event is dispatched with an email
-        m.dispatch('ChangeEmail', 'hello@des.io')
-
-        // Then we should remain in the Form state
-        expect(m.state).equals('Form')
-
-        // And our model should have the updated email
-        expect(model.email).equals('hello@des.io')
-
-        // When the ChangePassword event is dispatched with a password
-        m.dispatch('ChangePassword', 'abc123')
-
-        // Then we should remain in the Form state
-        expect(m.state).equals('Form')
-
-        // And our model should have the updated email
-        expect(model.password).equals('abc123')
+            expect(m.state).equals('Form')
+        })
     })
-})
-```
 
-Making that pass:
+    describe('Form', () => {
 
-```js
-Machine.transition('Form', 'ChangeEmail', (m, email) => {
-    m.model.email = email
-})
+        it('ChangeEmail,ChangePassword', () => {
+            // Given our initial model
+            const model = {
+                email: '',
+                password: '',
+            }
+            const m = Machine.start(model)
 
-Machine.transition('Form', 'ChangePassword', (m, password) => {
-    m.model.password = password
-})
-```
+            // And that we are in the 'Form' state
+            m.setState('Form')
 
-And then we can submit the form:
+            // When the ChangeEmail event is dispatched with an email
+            m.dispatch('ChangeEmail', 'hello@des.io')
 
-```js
-describe('Form', () => {
-    it('Submit', () => {
-        // Given our initial model
-        const model = {
-            email: 'hell@des.io',
-            password: 'abc123',
-        }
-        const m = Machine.start(model)
+            // Then we should remain in the Form state
+            expect(m.state).equals('Form')
+
+            // And our model should have the updated email
+            expect(model.email).equals('hello@des.io')
+
+            // When the ChangePassword event is dispatched with a password
+            m.dispatch('ChangePassword', 'abc123')
+
+            // Then we should remain in the Form state
+            expect(m.state).equals('Form')
+
+            // And our model should have the updated email
+            expect(model.password).equals('abc123')
+        })
+
+        it('Submit', () => {
+            // Given our initial model
+            const model = {
+                email: 'hell@des.io',
+                password: 'abc123',
+            }
+            const m = Machine.start(model)
+
+            // and that our backend api is mocked
+            const api = sandbox.stub(Api, 'post')
+            api.returns(Promise.defer().promise)
+
+            // And that we are in the 'Form' state
+            m.setState('Form')
+
+            // When the Submit event is fired
+            m.dispatch('Submit')
+
+            // Then we should be in the Authenticate state
+            expect(m.state).equals('Authenticate')
+
+            // And an api request to '/authenticate' should have been called with the form data
+            sinon.assert.calledWith(api, '/authenticate', {
+                email: 'hell@des.io',
+                password: 'abc123',
+            })
+        })
+    })
     
-        // and that our backend api is mocked
-        const api = sandbox.stub(Api, 'post')
-        api.returns(Promise.defer().promise)
+    describe('Authenticate', () => {
     
-        // And that we are in the 'Form' state
-        m.setState('Form')
-    
-        // When the Submit event is fired
-        m.dispatch('Submit')
-    
-        // Then we should be in the Authenticate state
-        expect(m.state).equals('Authenticate')
-    
-        // And an api request to '/authenticate' should have been called with the form data
-        sinon.assert.calledWith(api, '/authenticate', {
-            email: 'hell@des.io',
-            password: 'abc123',
+        it('OK', () => {
+            const m = Machine.start()
+            m.setState('Authenticate')
+
+            m.dispatch('OK')
+
+            expect(m.state).equals('Done')
+        })
+
+        it('NotAuthorized', () => {
+            const m = Machine.start()
+            m.setState('Authenticate')
+
+            m.dispatch('NotAuthorized')
+
+            expect(m.state).equals('Form')
         })
     })
 })
 ```
 
-making it pass, we can (notice we use model on the machine here):
+### Scaffolding:
 
-```js
-Machine.transition('Form', 'Submit', m => {
-    m.setState('Authenticate')
+We can scaffold the login state machine as follows:
 
-    Api.post('/authenticate', m.model)
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
-})
-```
-
-Finally:
-
-```js
-describe('Authenticate', () => {
-    it('OK', () => {
-        const m = Machine.start()
-        m.setState('Authenticate')
-        m.dispatch('OK')
-        expect(m.state).equals('Done')
-    })
-
-    it('NotAuthorized', () => {
-        const m = Machine.start()
-        m.setState('Authenticate')
-        m.dispatch('NotAuthorized')
-        expect(m.state).equals('Form')
-    })
-})
-```
-
-```js
-Machine.transition('Authenticate', 'OK', m => m.setState('Done'))
-Machine.transition('Authenticate', 'NotAuthorized', m => m.setState('Form'))
-```
-
-
-# Full code:
 ```js
 // LoginMachine.js
 import StateMachine from '../src/StateMachine'
@@ -398,37 +322,40 @@ import Api from './Api'
 
 const Machine = StateMachine('Init')
 
-// State: Init
+// Init
 Machine.transition('Init', 'Load', m => {
-    // first set the new state on the machine
     m.setState('GetSession')
 
-    // send the api request
     Api.post('/get-session')
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
+        .then(() => m.dispatch('OK'))
+        .catch(err => m.dispatch(err))
 })
 
-// State: GetSession
+// GetSession
 Machine.transition('GetSession', 'OK', m => m.setState('Done'))
 Machine.transition('GetSession', 'NotAuthorized', m => m.setState('Form'))
 
-// State: Form
+// form
 Machine.transition('Form', 'ChangeEmail', (m, email) => m.model.email = email)
 Machine.transition('Form', 'ChangePassword', (m, password) => m.model.password = password)
 Machine.transition('Form', 'Submit', m => {
     m.setState('Authenticate')
 
     Api.post('/authenticate', m.model)
-        .then(() => m.dispatch('OK')) // if successful, dispatch OK
-        .catch(err => m.dispatch(err)) // if error, dispatch the error
+        .then(() => m.dispatch('OK'))
+        .catch(err => m.dispatch(err))
 })
 
-// State: Authenticate
 Machine.transition('Authenticate', 'OK', m => m.setState('Done'))
 Machine.transition('Authenticate', 'NotAuthorized', m => m.setState('Form'))
 
 export default Machine
 ```
+
+### Usage in Vue
+
+```js
+```
+
 
 
