@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="302" height="295" viewBox="0 0 302 295">
+  <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+    <polygon fill="#FFF" fill-rule="nonzero" stroke="#000" points="0 293.228 0 0 300 0 300 293.228"/>
+    <circle cx="1.005" cy=".969" r="1" fill="#000" fill-rule="nonzero" stroke="#000" transform="translate(173.363 2.032)"/>
+    <g transform="translate(146.275 23.702)">
+      <circle cx="28.092" cy="28.267" r="27.937" stroke="#000"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="12.149" y="29.755">Stopped</tspan>
+      </text>
+    </g>
+    <g stroke="#000" transform="translate(172.009 3.386)">
+      <path d="M2.02058126,0.425086135 C2.02058126,2.60702744 2.02058126,8.09411904 2.02058126,14.5924676"/>
+      <polygon fill="#000" fill-rule="nonzero" points="3.798 14.631 2.021 19.977 .243 14.631"/>
+    </g>
+    <g transform="translate(2.032 113.77)">
+      <ellipse cx="37.234" cy="37.12" stroke="#000" rx="37.223" ry="36.955"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="14.293" y="39.654">Connecting</tspan>
+      </text>
+    </g>
+    <g transform="translate(69.074 68.397)">
+      <path stroke="#000" d="M82.8921299,0.028758465 C61.6206086,15.7965599 29.3534086,39.7150618 4.82932411,57.8938713"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="5.942 59.42 .5 61.103 3.71 56.373"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="23.265" y="24.054">Start</tspan>
+      </text>
+    </g>
+    <g transform="translate(130.7 107.675)">
+      <circle cx="43.668" cy="43.822" r="43.482" stroke="#000"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="19.436" y="46.322">Disconnected</tspan>
+      </text>
+    </g>
+    <g transform="translate(140.18 222.8)">
+      <circle cx="34.526" cy="34.438" r="34.197" stroke="#000"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="17.019" y="36.934">Connected</tspan>
+      </text>
+    </g>
+    <g transform="translate(68.397 173.363)">
+      <path stroke="#000" d="M0.237258429,0.490793181 C22.2201251,17.6952479 52.2711218,41.214113 74.6985726,58.7665486"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="75.864 57.291 78.936 62.083 73.545 60.251"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="5.526" y="38.557">ConnOpen</tspan>
+      </text>
+    </g>
+    <g transform="translate(172.009 79.233)">
+      <path stroke="#000" d="M2.12692765,28.2279927 C2.12692765,20.6473853 2.12692765,12.8661246 2.12692765,5.60734614"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points=".256 5.537 2.127 .17 3.998 5.537"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="6.02" y="21.639">Stop</tspan>
+      </text>
+    </g>
+    <g transform="translate(75.17 158.693)">
+      <path stroke="#000" d="M56.6140159,2.04742019 C43.9682934,3.83337955 30.0626245,4.78901967 17.2480719,3.48899387 C13.5795341,3.11681393 9.78885472,2.6030861 6,2"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="5.205 3.814 .22 1.021 5.822 .029"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="20" y="13">Retry</tspan>
+      </text>
+    </g>
+    <g transform="matrix(1 0 0 -1 75.17 146.693)">
+      <path stroke="#000" d="M56.6140159,2.04742019 C43.9682934,3.83337955 30.0626245,4.78901967 17.2480719,3.48899387 C13.5795341,3.11681393 9.78885472,2.6030861 6,2"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="5.205 3.814 .22 1.021 5.822 .029"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7" transform="matrix(1 0 0 -1 0 23)">
+        <tspan x="8" y="14">ConnClosed</tspan>
+      </text>
+    </g>
+    <g transform="translate(236.343 119.865)">
+      <circle cx="31.14" cy="31.294" r="30.765" stroke="#000"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="16.879" y="34.815">Stopping</tspan>
+      </text>
+    </g>
+    <g transform="translate(193.002 71.783)">
+      <path stroke="#000" d="M53.0350962,56.4805102 C38.3918628,40.8483317 18.9091691,20.0499331 3.92464796,4.05347672"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="2.515 5.298 .218 .096 5.263 2.732"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="30.756" y="28.152">ConnClosed</tspan>
+      </text>
+    </g>
+    <g transform="translate(172.009 194.357)">
+      <path stroke="#000" d="M2.14923251,28.1480855 C2.14923251,20.9414694 2.14923251,13.1984718 2.14923251,5.56360918"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points=".258 5.399 2.149 .033 4.04 5.399"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="3.879" y="18.603">ConnClosed</tspan>
+      </text>
+    </g>
+    <g transform="translate(199.774 176.75)">
+      <path stroke="#000" d="M0.0895026578,57.9271583 C7.30882691,51.2882042 14.9668274,43.8188011 21.5422282,36.470622 C30.423737,26.5452471 39.3073473,14.9581114 46.8547761,4.49224354"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="45.336 3.373 50.004 .084 48.405 5.568"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="27.901" y="39.441">Stop</tspan>
+      </text>
+    </g>
+    <g transform="translate(207.223 248.533)">
+      <path stroke="#000" d="M0.122383747,0.0562897599 C6.44906546,1.05926124 10.9231422,3.85342089 10.9231422,8.43860866 C10.9231422,11.5909419 8.80843341,13.8966879 5.43088036,15.3558999"/>
+      <polygon fill="#000" fill-rule="nonzero" stroke="#000" points="5.851 17.179 .122 16.821 4.827 13.583"/>
+      <text fill="#000" font-family="FiraCode-Regular, Fira Code" font-size="7">
+        <tspan x="15.869" y="10.996">Message</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
