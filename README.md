@@ -1,8 +1,9 @@
 # machine
 
-Minimal, tiny, zero-dependency state machine implementation in javascript.
+Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 ## Get Started
+
 1. Copy `StateMachine.js` (~50 lines of code) or `StateMachine.min.js` (~850 bytes) to your project.
 1. Define a new state machine with a starting state and error function:
     ```js
