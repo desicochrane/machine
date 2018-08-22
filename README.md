@@ -1,6 +1,9 @@
 # machine
 
-Minimal, zero-dependency state machine implementation in javascript.
+Minimal, tiny, zero-dependency state machine implementation in javascript.
+
+## Get Started:
+Copy `StateMachine.js` or `StateMachine.min.js` (~850bytes) to your project.
 
 ## Example 1: Websocket
 
