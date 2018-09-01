@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import StateMachine from '../src/StateMachine'
+import StateMachine from '../StateMachine'
 
 describe('StateMachine', () => {
 
@@ -49,6 +49,7 @@ describe('StateMachine', () => {
 
         const machine = builder.start(Model)
 
+        expect(machine.inState(EditState)).to.be.true
         expect(machine.state).to.equal(EditState)
         expect(machine.model.username).to.equal('')
         expect(machine.model.err).to.equal(null)

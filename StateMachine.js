@@ -12,7 +12,7 @@ export default function(startState, onError) {
         }
 
         function inState() {
-            return Array.from(arguments).find(state => model.state === state)
+            return !!Array.from(arguments).find(state => machine.state === state)
         }
 
         function dispatch(event, data) {
