@@ -1,8 +1,8 @@
 {
   "name": "@desicochrane/machine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
-  "main": "index.js",
+  "main": "StateMachine.js",
   "scripts": {
     "test": "mocha --require babel-core/register ./tests/**/*Test.js"
   },
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/desicochrane/machine/issues"
   },
