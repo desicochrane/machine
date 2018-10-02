@@ -4,7 +4,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 ## Get Started
 
-1. `npm install @desicochrane/machine`s.
+1. `npm install @desicochrane/machine`
 1. Define a new state machine with a starting state and error function:
     ```js
     const machine = StateMachine('off', (m, err) => {
@@ -24,7 +24,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
     
     machine.transition('on', 'switchOn')
     ```
-1. Instatiate your machine:
+1. Instantiate your machine:
     ```js
     const m = machine.start({ counter: 0 })
     ```
@@ -46,7 +46,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 Consider implementing a wrapper around a browser websocket connection. Your API might support starting and stopping the websocket connection, handling reconnects when there is an unexpected disconnect, and handling sending and recieving messages when the connection is open.
 
-We can visualise how should work with the following state machine:
+We can visualise how it should work with the following state machine:
 
 <img src="docs/websocket.svg" style="display: block; width: 300px; margin: 0 auto;">
 
