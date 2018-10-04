@@ -1,4 +1,3 @@
-```
 ## Usage in Vue
 
 ```js

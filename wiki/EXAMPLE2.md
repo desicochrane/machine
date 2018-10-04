@@ -1,12 +1,11 @@
-
-## Example 2: Login Form + Testing + VueJS
+## Login Form + Testing + VueJS
 
 Consider next implementing a login form. This login form should redirect immediately to the dashboard if the user is already logged in, otherwise it should show the email and password form. Once on the form, the user can change the email and passowrd before submitting the form, if they are authorized then they should be redirected to the dashboard.
 
 Based on these requirements we can construct the following state machine:
 
 
-<img src="docs/login.dot.svg">
+<img src="../docs/login.dot.svg">
 
 
 #### Testing

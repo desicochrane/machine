@@ -77,3 +77,5 @@ Machine.transition(States.Authenticate, Errors.NotAuthorized, m => {
 })
 
 export default Machine
+
+```

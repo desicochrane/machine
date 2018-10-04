@@ -1,10 +1,10 @@
-## Examples 1: Websocket
+## Websocket
 
 Consider implementing a wrapper around a browser websocket connection. Your API might support starting and stopping the websocket connection, handling reconnects when there is an unexpected disconnect, and handling sending and recieving messages when the connection is open.
 
 We can visualise how it should work with the following state machine:
 
-<img src="docs/websocket.svg" style="display: block; width: 300px; margin: 0 auto;">
+<img src="../docs/websocket.svg" style="display: block; width: 300px; margin: 0 auto;">
 
 The machine is initially in the `Stopped` state. We specify this when we create our state machine:
 ```js
@@ -139,4 +139,3 @@ const ws = WebsocketMachine.start(model)
 ```
 
 This illustrates the `start` method, which returns a new instance of the state machine. It takes as argument a model which can be mutated and accessed internally by the state machine - in this case it provides a callback to be used when there is a websocket message arriving.
-```

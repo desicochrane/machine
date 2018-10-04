@@ -42,7 +42,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
    ```
 
 
-## Examples 1: 
+## Examples: 
 
 1. [Websocket](./wiki/EXAMPLE1.md)
 2. [Login Form + Testing + VueJS](./wiki/EXAMPLE2.md)
