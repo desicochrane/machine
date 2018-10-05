@@ -10,7 +10,7 @@ exports.default = function (startState, onError) {
     function start(model) {
         var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-        var logging = config.logging === true;
+        var logger = config.logger || function () {};
 
         var machine = { state: null, model: model, setState: setState, inState: inState, dispatch: dispatch };
 
@@ -26,20 +26,19 @@ exports.default = function (startState, onError) {
         }
 
         function dispatch(event, data) {
-            if (machine.state === null) err("no start state set");
-
-            if (logging) console.log("dispatch: " + machine.state + ":" + event, data);
+            logger("dispatch: " + machine.state + ":" + event, data);
 
             var events = stateFns[machine.state];
-            if (!events) err("transition " + machine.state + ":" + event + " not defined");
+            if (!events) return err("transition " + machine.state + ":" + event + " not defined");
 
             var fn = stateFns[machine.state][event];
-            if (!fn) err("transition " + machine.state + ":" + event + " not defined");
+            if (!fn) return err("transition " + machine.state + ":" + event + " not defined");
+
             fn(machine, data);
         }
 
         function setState(state) {
-            if (logging) console.log("transition: " + machine.state + " -> " + state);
+            logger("transition: " + machine.state + " -> " + state);
             machine.state = state;
         }
 
