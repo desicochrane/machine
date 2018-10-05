@@ -105,6 +105,21 @@ describe('StateMachine', () => {
         expect(errorThrown).equals(true)
     })
 
+    it('throws error on transition errors', () => {
+        const M = StateMachine('start')
+
+        const m = M.start({})
+
+        let errorThrown = false
+        try {
+            m.dispatch('boom')
+        } catch(e) {
+            errorThrown = true
+        }
+
+        expect(errorThrown).equals(true)
+    })
+
     it('calls a given error function if provided on transition errors', () => {
         let errorMsg = null
         const errFn = (m, msg) => errorMsg = msg
