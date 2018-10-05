@@ -1,5 +1,7 @@
 # machine
 
+[![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master)](https://coveralls.io/github/desicochrane/machine?branch=master)
+
 Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 ## Get Started
@@ -43,6 +45,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 
 ## Examples
-[Example 1: Websocket](EXAMPLES.md#example1)
+
+[Example 1: Websocket Client](EXAMPLES.md#example1)
 
 [Example 2: Login Form + Testing + VueJS](EXAMPLES.md#example2)
