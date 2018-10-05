@@ -2,7 +2,7 @@ export default function(startState, onError) {
     const stateFns = {}
 
     function start(model, config = {}) {
-        const logging = config.logging === true
+        const logger = config.logger || (() => {})
 
         const machine = { state: null, model, setState, inState, dispatch }
 
@@ -16,9 +16,7 @@ export default function(startState, onError) {
         }
 
         function dispatch(event, data) {
-            if (machine.state === null) err(`no start state set`)
-
-            if (logging) console.log(`dispatch: ${machine.state}:${event}`, data)
+            logger(`dispatch: ${machine.state}:${event}`, data)
 
             const events = stateFns[machine.state]
             if (!events) return err(`transition ${machine.state}:${event} not defined`)
@@ -30,7 +28,7 @@ export default function(startState, onError) {
         }
 
         function setState(state) {
-            if (logging) console.log(`transition: ${machine.state} -> ${state}`)
+            logger(`transition: ${machine.state} -> ${state}`)
             machine.state = state
         }
 

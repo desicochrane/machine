@@ -1,6 +1,6 @@
 import LoginMachine, { States, Events, Errors, NewModel } from './LoginMachine'
 
-const m = LoginMachine.start(NewModel(), { logging: true })
+const m = LoginMachine.start(NewModel(), { logger: console.log })
 
 new Vue({
     data: { m },

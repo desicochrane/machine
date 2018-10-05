@@ -132,4 +132,18 @@ describe('StateMachine', () => {
 
         expect(errorMsg).equals('transition start:boom not defined')
     })
+
+    it('calls a given error function if provided on transition errors', () => {
+        let errorMsg = null
+        const errFn = (m, msg) => errorMsg = msg
+
+        const M = StateMachine('start', errFn)
+        M.transition('start', 'event', () => {})
+
+        const m = M.start({})
+
+        m.dispatch('boom')
+
+        expect(errorMsg).equals('transition start:boom not defined')
+    })
 })
