@@ -1,5 +1,7 @@
 # Machine   ![Open Source](https://cdn.rawgit.com/ellerbrock/open-source-badges/master/badges/open-source-v1/open-source.svg)
 
+[![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master)](https://coveralls.io/github/desicochrane/machine?branch=master)
+
 Minimal, tiny, zero-dependency state-machine implementation in javascript.
 
 ## Get Started
@@ -42,9 +44,8 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
    ```
 
 
-## Examples: 
+## Examples
 
-1. [Websocket](./wiki/EXAMPLE1.md)
-2. [Login Form + Testing + VueJS](./wiki/EXAMPLE2.md)
-3. [Scaffolding](./wiki/SCAFFOLDING.md)
-4. [Usage in Vue](./wiki/EXAMPLE-VUE.md)
+[Example 1: Websocket Client](EXAMPLES.md#example1)
+
+[Example 2: Login Form + Testing + VueJS](EXAMPLES.md#example2)
