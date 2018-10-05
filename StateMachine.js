@@ -21,10 +21,11 @@ export default function(startState, onError) {
             if (logging) console.log(`dispatch: ${machine.state}:${event}`, data)
 
             const events = stateFns[machine.state]
-            if (!events) err(`transition ${machine.state}:${event} not defined`)
+            if (!events) return err(`transition ${machine.state}:${event} not defined`)
 
             const fn = stateFns[machine.state][event]
-            if (!fn) err(`transition ${machine.state}:${event} not defined`)
+            if (!fn) return err(`transition ${machine.state}:${event} not defined`)
+
             fn(machine, data)
         }
 
