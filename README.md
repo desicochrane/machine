@@ -9,9 +9,7 @@ Minimal, tiny, zero-dependency state-machine implementation in javascript.
 1. `npm install @desicochrane/machine`
 1. Define a new state machine with a starting state and error function:
     ```js
-    const machine = StateMachine('off', (m, err) => {
-        console.log(err)
-    })
+    const machine = StateMachine('off', (m, err) => console.log(err))
     ```
 1. Define a transition via `machine.transition(state, event, callback)` :
     ```js
