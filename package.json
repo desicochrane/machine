@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --require babel-core/register ./tests/**/*Test.js",
-    "report-coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "prepublish": "babel -o index.js StateMachine.js"
   },
   "repository": {
@@ -27,5 +27,15 @@
     "mocha": "^5.2.0",
     "nyc": "13.0.1",
     "sinon": "^6.1.4"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "tests"
+    ]
   }
 }
