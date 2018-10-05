@@ -9,9 +9,9 @@ We can visualise how it should work with the following state machine:
 The machine is initially in the `Stopped` state. We specify this when we create our state machine:
 ```js
 // WebsocketMachine.js
-import StateMachine from './StateMachine'
+import MachineBuilder from '@desicochrane/machine'
 
-const WebsocketMachine = StateMachine('Stopped')
+const WebsocketMachine = MachineBuilder('Stopped')
 ```
 
 This demonstrates how the StateMachine function is used to bootstrap a new state machine. The function takes as first argument an enum to set the initial state, and an optional second argument which is a callback for when there is an error. 
@@ -19,9 +19,9 @@ This demonstrates how the StateMachine function is used to bootstrap a new state
 From the `Stopped` state there is only the `Start` transition event, which we can specify:
 ```js
 // WebsocketMachine.js
-import StateMachine from './StateMachine'
+import Machine from '@desicochrane/machine'
 
-const WebsocketMachine = StateMachine('Stopped')
+const WebsocketMachine = Machine('Stopped')
 
 WebsocketMachine.transition('Stopped', 'Start', (m, data) => {
     m.setState('Connecting')
@@ -46,9 +46,9 @@ To illustrate how dispatching events works, we can next implement the bootstrapp
 
 ```js
 // WebsocketMachine.js
-import StateMachine from './StateMachine'
+import Machine from '@desicochrane/machine'
 
-const WebsocketMachine = StateMachine('Stopped')
+const WebsocketMachine = Machine('Stopped')
 
 WebsocketMachine.transition('Stopped', 'Start', (m, data) => {
     m.setState('Connecting')
@@ -73,9 +73,9 @@ Here you can see we added a helper function `bootstrapWSConnection` which create
 We can implement the rest of our state machine in the same way to arrive at the final result:
 
 ```js
-import StateMachine from './StateMachine'
+import Machine from '@desicochrane/machine'
 
-const WebsocketMachine = StateMachine('Stopped')
+const WebsocketMachine = Machine('Stopped')
 
 // Stopped
 WebsocketMachine.transition('Stopped', 'Start', m => {
