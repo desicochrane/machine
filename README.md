@@ -7,26 +7,29 @@ Tiny and dependency-free state-machine implementation in javascript.
 ## Get Started
 
 1. `npm install @desicochrane/machine`
-1. Define a new state machine with a starting state and error function:
+1. Define a new state machine with a starting state
     ```js
-    const machine = StateMachine('off', (m, err) => console.log(err))
+    import Machine from '@desicochrane/machine'
+
+    const MyMachine = Machine('off')
     ```
 1. Define a transition via `machine.transition(state, event, callback)` :
     ```js
-    machine.transition('off', 'switchOn', (m, data) => {
+    MyMachine.transition('off', 'switchOn', (m, data) => {
         m.setState('on')
         m.model.counter += data
     }) 
     
-    machine.transition('on', 'switchOff', (m) => {
+    MyMachine.transition('on', 'switchOff', (m) => {
         m.setState('off')
     })
     
-    machine.transition('on', 'switchOn')
+    MyMachine.transition('on', 'switchOn')
     ```
-1. Instantiate your machine:
+1. Instantiate your machine with your model:
     ```js
-    const m = machine.start({ counter: 0 })
+    const model = { counter: 0 }
+    const m = MyMachine.start(model)
     ```
 1. Dispatch events
    ```js
@@ -35,10 +38,7 @@ Tiny and dependency-free state-machine implementation in javascript.
    m.dispatch('switchOff')
    m.dispatch('switchOn', 2)
    
-   console.log(m.model.counter) // 3
-   
-   m.dispatch('switchOff')
-   m.dispatch('switchOff') // error: transition off:switchOff not defined
+   console.log(model.counter) // 3
    ```
 
 
