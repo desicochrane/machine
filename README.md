@@ -1,6 +1,5 @@
 # Machine   
 
-![Open Source](https://cdn.rawgit.com/ellerbrock/open-source-badges/master/badges/open-source-v1/open-source.svg)
 [![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master)](https://coveralls.io/github/desicochrane/machine?branch=master)
 
 Minimal, tiny, zero-dependency state-machine implementation in javascript.
