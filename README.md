@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master)](https://coveralls.io/github/desicochrane/machine?branch=master)
 
-Minimal, tiny, zero-dependency state-machine implementation in javascript.
+Tiny and dependency-free state-machine implementation in javascript.
 
 ## Get Started
 
