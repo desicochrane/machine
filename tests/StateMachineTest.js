@@ -86,4 +86,22 @@ describe('StateMachine', () => {
             }, 1)
         }, 1)
     })
+
+    it('disallows duplicate transition definitions', () => {
+        const M = StateMachine('start')
+
+        // given there is already a start:event transition defined
+        M.transition('start', 'event', () => {})
+
+        // when we try to define another
+        let errorThrown = false
+        try {
+            M.transition('start', 'event', () => {})
+        } catch(e) {
+            errorThrown = true
+        }
+
+        // then an error should be thrown
+        expect(errorThrown).equals(true)
+    })
 })
