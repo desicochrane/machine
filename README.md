@@ -1,6 +1,6 @@
 # Machine   
 
-[![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master)](https://coveralls.io/github/desicochrane/machine?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master&q=1)](https://coveralls.io/github/desicochrane/machine?branch=master)
 
 Tiny dependency-free state-machine implementation in javascript.
 
@@ -13,7 +13,7 @@ Tiny dependency-free state-machine implementation in javascript.
 
     const MyMachine = Machine('off')
     ```
-1. Define a transition via `machine.transition(state, event, callback)` :
+1. Define state transitions via `machine.transition(<state>, <event>, <action>)` :
     ```js
     MyMachine.transition('off', 'switchOn', (m, data) => {
         m.setState('on')
