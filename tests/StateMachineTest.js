@@ -146,4 +146,18 @@ describe('StateMachine', () => {
 
         expect(errorMsg).equals('transition start:boom not defined')
     })
+
+    it('optionally takes a log fn', () => {
+        const M = StateMachine('start')
+        M.transition('start', 'event', () => {})
+
+        let logMsg = null
+        const logFn = (msg) => logMsg = msg
+
+        const m = M.start({}, logFn)
+
+        m.dispatch('event')
+
+        expect(logMsg).equals('dispatch: start:event')
+    })
 })

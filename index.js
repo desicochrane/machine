@@ -8,9 +8,7 @@ exports.default = function (startState, onError) {
     var stateFns = {};
 
     function start(model) {
-        var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        var logger = config.logger || function () {};
+        var logger = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
         var machine = { state: null, model: model, setState: setState, inState: inState, dispatch: dispatch };
 

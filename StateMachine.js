@@ -1,9 +1,7 @@
 export default function(startState, onError) {
     const stateFns = {}
 
-    function start(model, config = {}) {
-        const logger = config.logger || (() => {})
-
+    function start(model, logger = () => {}) {
         const machine = { state: null, model, setState, inState, dispatch }
 
         function err(msg) {
