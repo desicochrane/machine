@@ -1,8 +1,8 @@
 {
   "name": "@desicochrane/machine",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
-  "main": "Machine.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "prepublish": "babel --presets @babel/preset-env Machine.js -o index.js",
