@@ -70,9 +70,3 @@ Tiny dependency-free state-machine implementation in javascript.
     m.click(2)
     console.log(m.data.count) // 1
     ```
-
-## Examples
-
-[Example 1: Websocket Client](EXAMPLES.md#example1)
-
-[Example 2: Login Form + Testing + VueJS](EXAMPLES.md#example2)
