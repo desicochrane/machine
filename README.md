@@ -35,14 +35,14 @@ Tiny dependency-free state-machine implementation in javascript.
    console.log(m.state) // "on"
    ```
 1. Export to Dot file:
-```
-import { Dot } from  '@desicochrane/machine'
-import fs from 'fs'
+    ```
+    import { Dot } from  '@desicochrane/machine'
+    import fs from 'fs'
 
-const dot = Dot(spec)
+    const dot = Dot(spec)
 
-fs.writeFileSync('machine.dot', dot);
-```
+    fs.writeFileSync('machine.dot', dot);
+    ```
 1. Optionally pass in data
     ```js
     import Machine, { Transition } from '@desicochrane/machine'
