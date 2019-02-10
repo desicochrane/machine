@@ -6,44 +6,67 @@ Tiny dependency-free state-machine implementation in javascript.
 
 ## Get Started
 
+### Basic:
 1. `npm install @desicochrane/machine`
-1. Define a new state machine with a starting state
+1. Define a new state machine specification
     ```js
-    import Machine from '@desicochrane/machine'
+    import Machine, { Transition } from '@desicochrane/machine'
 
-    const MyMachine = Machine('off')
+    const spec = {
+        __start__: 'off',
+        off: {
+            click: Transition('on'),
+        },
+        on: {
+            click: Transition('off'),
+        }
+    }
     ```
-1. Define state transitions via `machine.transition(<state>, <event>, <action>)` :
+1. Instantiate your machine with data:
     ```js
-    MyMachine.transition('off', 'switchOn', (m, data) => {
-        m.setState('on')
-        m.model.counter += data
-    }) 
-    
-    MyMachine.transition('on', 'switchOff', (m) => {
-        m.setState('off')
-    })
-    
-    MyMachine.transition('on', 'switchOn')
+    const m = Machine(spec)
     ```
-1. Instantiate your machine with your model:
-    ```js
-    const model = { counter: 0 }
-    const m = MyMachine.start(model)
-    ```
-1. Dispatch events
+1. Use the machine
    ```js
-   m.dispatch('switchOn', 1)
-   m.dispatch('switchOn', 10)
-   m.dispatch('switchOff')
-   m.dispatch('switchOn', 2)
+   console.log(m.state) // "off"
    
-   console.log(model.counter) // 3
+   m.click()
+   
+   console.log(m.state) // "on"
    ```
+1. Export to Dot file:
+    ```
+    import { Dot } from  '@desicochrane/machine'
+    import fs from 'fs'
 
+    const dot = Dot(spec)
 
-## Examples
+    fs.writeFileSync('machine.dot', dot);
+    ```
+1. Optionally pass in data
+    ```js
+    import Machine, { Transition } from '@desicochrane/machine'
 
-[Example 1: Websocket Client](EXAMPLES.md#example1)
-
-[Example 2: Login Form + Testing + VueJS](EXAMPLES.md#example2)
+    const spec = {
+        __start__: 'off',
+        off: {
+            click: Transition('on', (m, args) => {
+                m.data.count += args
+            }),
+        },
+        on: {
+            click: Transition('off', (m, args) => {
+                m.data.count -= args
+            }),
+        }
+    }
+    
+    
+    const m = Machine(spec, { count: 0 })
+    
+    m.click(3)
+    console.log(m.data.count) // 3
+    
+    m.click(2)
+    console.log(m.data.count) // 1
+    ```
