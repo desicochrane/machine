@@ -1,4 +1,4 @@
-# Machine   
+# Machine
 
 [![Coverage Status](https://coveralls.io/repos/github/desicochrane/machine/badge.svg?branch=master&q=1)](https://coveralls.io/github/desicochrane/machine?branch=master)
 

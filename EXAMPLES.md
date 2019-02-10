@@ -14,7 +14,7 @@ import MachineBuilder from '@desicochrane/machine'
 const WebsocketMachine = MachineBuilder('Stopped')
 ```
 
-This demonstrates how the StateMachine function is used to bootstrap a new state machine. The function takes as first argument an enum to set the initial state, and an optional second argument which is a callback for when there is an error. 
+This demonstrates how the Machine function is used to bootstrap a new state machine. The function takes as first argument an enum to set the initial state, and an optional second argument which is a callback for when there is an error.
 
 From the `Stopped` state there is only the `Start` transition event, which we can specify:
 ```js
