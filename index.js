@@ -21,7 +21,7 @@ function Machine(def, data) {
             state = _def$machine$state$ev.state,
             handler = _def$machine$state$ev.handler;
         machine.state = state;
-        handler && handler(machine, args);
+        return handler ? handler(machine, args) : Promise.resolve();
       };
     });
   });

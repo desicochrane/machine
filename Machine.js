@@ -6,7 +6,7 @@ export default function Machine(def, data) {
             machine[eventName] = (args) => {
                 const {state, handler} = def[machine.state][eventName]
                 machine.state = state
-                handler && handler(machine, args)
+                return handler ? handler(machine, args) : Promise.resolve()
             }
         })
     })
