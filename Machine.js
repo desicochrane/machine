@@ -24,7 +24,7 @@ export function Dot(def) {
         if (seen[stateName]) return
         seen[stateName] = true
 
-        const stateObj = def[stateName]
+        const stateObj = def[stateName] || {}
         Object.keys(stateObj).forEach(eventName => {
             result += `  "${stateName}" -> "${stateObj[eventName].state}" [label="${eventName}"]\n`
             walk(stateObj[eventName].state)

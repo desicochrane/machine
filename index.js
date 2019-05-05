@@ -44,7 +44,7 @@ function Dot(def) {
   function walk(stateName) {
     if (seen[stateName]) return;
     seen[stateName] = true;
-    var stateObj = def[stateName];
+    var stateObj = def[stateName] || {};
     Object.keys(stateObj).forEach(function (eventName) {
       result += "  \"".concat(stateName, "\" -> \"").concat(stateObj[eventName].state, "\" [label=\"").concat(eventName, "\"]\n");
       walk(stateObj[eventName].state);
