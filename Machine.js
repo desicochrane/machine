@@ -3,10 +3,10 @@ export default function Machine(def, data) {
 
     Object.keys(def).filter(k => k !== '__start__').forEach(stateName => {
         Object.keys(def[stateName]).forEach(eventName => {
-            machine[eventName] = (args) => {
+            machine[eventName] = (...args) => {
                 const {state, handler} = def[machine.state][eventName]
                 machine.state = state
-                return handler ? handler(machine, args) : Promise.resolve()
+                return handler ? handler(machine, ...args) : Promise.resolve()
             }
         })
     })
